@@ -1,0 +1,1 @@
+This is where we upload all the necessary scripts needed for the whole project itself.
