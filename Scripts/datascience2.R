@@ -1,5 +1,5 @@
 # Data Science Demo 2: Group summaries + reporting plot
-#
+
 # Why this exists:
 # - Group summaries answer practical questions like: "How do categories compare?"
 # - A plot communicates the comparison more clearly than a raw table.

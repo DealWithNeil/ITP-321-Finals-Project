@@ -1,5 +1,5 @@
-# Data Science Demo 1: Linear regression + visualization
-#
+# Data Science 1: Linear regression + visualization
+
 # Why this exists:
 # - Regression quantifies the relationship between variables.
 # - Visualizing the data alongside the fitted line helps validate that a linear

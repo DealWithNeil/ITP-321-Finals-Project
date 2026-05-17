@@ -1,5 +1,5 @@
 # Function Demo 2: Calculate the area of a rectangle
-#
+
 # Why this exists:
 # - Demonstrates parameterized functions and returning values.
 # - Basic validation keeps output meaningful and reduces debugging time.

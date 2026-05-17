@@ -1,0 +1,199 @@
+---
+title: " ITP-321 Final Project"
+author: "Nacionales Maranello, Francis John Carlo, Ashlie Mae Orlanda"
+date: "2026-05-17"
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(ggplot2)
+library(dplyr)
+```
+
+#  Introduction
+
+This project demonstrates core R programming concepts including loops, functions, data visualization, and introductory data science techniques. Each section includes working examples and explanations to highlight practical applications.
+
+---
+
+#  For Loop Scripts
+
+## Staircase Pattern
+
+This example demonstrates how a `for` loop can be used to build structured output step-by-step.
+
+```{r}
+build_staircase <- function(total_steps = 10L) {
+  staircase <- ""
+  for (step in seq_len(total_steps)) {
+    staircase <- paste0(staircase, "Step ", step, ": ", paste(rep("*", step), collapse = " "), "\n")
+  }
+  staircase
+}
+
+cat(build_staircase(10))
+```
+
+---
+
+## Multiplication Table Report
+
+This script generates a formatted multiplication table and adds simple number insights.
+
+```{r}
+is_perfect_square <- function(x) {
+  x >= 0 & floor(sqrt(x))^2 == x
+}
+
+for (i in 1:10) {
+  product <- 7 * i
+  parity <- ifelse(product %% 2 == 0, "EVEN", "ODD")
+  note <- ifelse(is_perfect_square(product), " (square)", "")
+  cat(i, "x 7 =", product, "-", parity, note, "\n")
+}
+```
+
+---
+
+#  While Loop Scripts
+
+## Launch Simulation
+
+Demonstrates how a `while` loop updates values dynamically over time.
+
+```{r}
+t <- 1
+altitude <- 0
+fuel <- 100
+
+while (t <= 5) {
+  altitude <- altitude + t * 10
+  fuel <- fuel - 5
+  cat("Time:", t, "| Altitude:", altitude, "| Fuel:", fuel, "\n")
+  t <- t + 1
+}
+```
+
+---
+
+## Auction Countdown
+
+A simple countdown using a condition-based loop.
+
+```{r}
+time <- 5
+while (time > 0) {
+  cat("Time left:", time, "\n")
+  time <- time - 1
+}
+```
+
+---
+
+#  Functions
+
+## Add Numbers
+
+```{r}
+add_numbers <- function(a, b) {
+  a + b
+}
+
+add_numbers(5, 3)
+```
+
+---
+
+## Rectangle Area
+
+```{r}
+calculate_area <- function(length, width) {
+  length * width
+}
+
+calculate_area(5, 4)
+```
+
+---
+
+#  Data Visualization
+
+## Scatter Plot (mtcars)
+
+This plot shows the relationship between car weight and fuel efficiency.
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "#2C3E50", size = 3) +
+  theme_minimal() +
+  labs(
+    title = "Weight vs Fuel Efficiency",
+    x = "Weight",
+    y = "MPG"
+  )
+```
+
+---
+
+## Bar Chart (iris)
+
+Displays the distribution of species in the dataset.
+
+```{r}
+ggplot(iris, aes(x = Species, fill = Species)) +
+  geom_bar() +
+  theme_minimal() +
+  guides(fill = "none") +
+  labs(title = "Count of Iris Species")
+```
+
+---
+
+#  Data Science
+
+## Linear Regression
+
+This model predicts MPG based on weight.
+
+```{r}
+model <- lm(mpg ~ wt, data = mtcars)
+summary(model)
+
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "red") +
+  theme_minimal()
+```
+
+---
+
+## Group Summary (iris)
+
+Compares average petal length across species.
+
+```{r}
+iris_summary <- iris %>%
+  group_by(Species) %>%
+  summarise(avg_length = mean(Petal.Length))
+
+iris_summary
+
+ggplot(iris, aes(Species, Petal.Length, fill = Species)) +
+  stat_summary(fun = mean, geom = "col") +
+  theme_minimal() +
+  guides(fill = "none")
+```
+
+---
+
+# Conclusion
+
+This project highlights foundational programming and data analysis skills in R, including control structures, reusable functions, data visualization, and basic statistical modeling. These techniques form the building blocks for more advanced data science workflows.
