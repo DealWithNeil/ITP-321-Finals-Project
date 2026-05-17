@@ -1,22 +1,37 @@
-# ggplot2: Bar chart showing the count of each iris species
+# Visualization Demo 1: Bar chart of category counts
+#
+# Why this exists:
+# - A count plot quickly checks class balance and whether the dataset looks
+#   consistent before doing deeper analysis.
 
-# Load ggplot2 package for creating graphs
-library(ggplot2)
 
-# Load built-in iris data set containing flower measurements
+#   ITP321_AUTO_INSTALL=1
+auto_install <- identical(Sys.getenv("ITP321_AUTO_INSTALL"), "1")
+
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  if (isTRUE(auto_install)) {
+    install.packages("ggplot2")
+  } else {
+    stop(
+      "Missing dependency: ggplot2. Install it with install.packages('ggplot2')\n",
+      "Or re-run with ITP321_AUTO_INSTALL=1 to auto-install.",
+      call. = FALSE
+    )
+  }
+}
+
+# ---- Data ----
 data(iris)
 
-# Create bar chart
-ggplot(iris, aes(x = Species, fill = Species)) +
-  
-  # Automatically count number of observations per species
-  geom_bar() +
-  
-  # Add title to describe what is being compared
-  ggtitle("Count of Iris Species") +
-  
-  # Label x-axis to indicate flower categories
-  xlab("Species") +
-  
-  # Label y-axis to indicate frequency/count
-  ylab("Count")
+# ---- Plot ----
+ggplot2::ggplot(iris, ggplot2::aes(x = Species, fill = Species)) +
+  # `geom_bar()` counts rows per species automatically (good for quick checks).
+  ggplot2::geom_bar(width = 0.7, alpha = 0.9) +
+  ggplot2::labs(
+    title = "Count of Iris Species (iris)",
+    x = "Species",
+    y = "Count"
+  ) +
+  # Legend is redundant because categories are already on the x-axis.
+  ggplot2::guides(fill = "none") +
+  ggplot2::theme_minimal()
